@@ -1,16 +1,17 @@
 use config::{Config, ConfigError, File, Environment};
 use serde::Deserialize;
+use serenity::all::{ChannelId, GuildId, RoleId};
 
 
 #[derive(Deserialize, Debug)]
 pub struct ConfigGuildWelcomeInfo {
-    welcome_channel: u64,
-    welcome_roles: Vec<u64>
+    welcome_channel: ChannelId,
+    welcome_roles: Vec<RoleId>
 }
 
 #[derive(Deserialize, Debug)]
 pub struct ConfigGuildInfo {
-    guild_id: u64,
+    guild_id: GuildId,
 
     welcome_info: ConfigGuildWelcomeInfo
 }
@@ -22,19 +23,19 @@ pub struct Configuration {
 
 impl ConfigGuildWelcomeInfo {
     /// The channel used to welcome members.
-    pub fn welcome_channel(&self) -> u64 {
+    pub fn welcome_channel(&self) -> ChannelId {
         self.welcome_channel
     }
 
     /// The roles given to the new member.
-    pub fn welcome_roles(&self) -> &[u64] {
+    pub fn welcome_roles(&self) -> &[RoleId] {
         &self.welcome_roles
     }
 }
 
 impl ConfigGuildInfo {
     /// The guild id this bot will act on.
-    pub fn guild_id(&self) -> u64 {
+    pub fn guild_id(&self) -> GuildId {
         self.guild_id
     }
 
