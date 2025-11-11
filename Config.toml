@@ -1,0 +1,7 @@
+
+[guild_info]
+guild_id = 1126270914766577754
+
+[guild_info.welcome_info]
+welcome_channel = 1126270914766577757
+welcome_roles = [1126622437669355581]
