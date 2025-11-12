@@ -9,10 +9,13 @@ use serenity::all::GatewayIntents;
 use tracing_subscriber::{fmt, EnvFilter};
 
 use crate::application::context::{AppContext, AppContextError, AppContextKey};
-use crate::events::Handler;
+use crate::events::ai_channel::AiChannelEventHandler;
+use crate::events::member_salute::MemberSaluteEventHandler;
 
 mod application;
 mod events;
+mod helpers;
+
 
 #[derive(Error, Debug)]
 enum BotError {
@@ -42,7 +45,8 @@ async fn main() -> Result<(), BotError> {
             .discord_token(),
         GatewayIntents::all()
     )
-        .event_handler(Handler)
+        .event_handler(AiChannelEventHandler)
+        .event_handler(MemberSaluteEventHandler)
         .await?;
 
     {
