@@ -5,3 +5,6 @@ guild_id = 1126270914766577754
 [guild_info.welcome_info]
 welcome_channel = 1126270914766577757
 welcome_roles = [1126622437669355581]
+
+[guild_info.ai_info]
+ai_channel = 1437769832203423865

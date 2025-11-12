@@ -11,9 +11,6 @@ enum GuildMemberAddError {
     #[error("Missing AppContext in application data.")]
     MissingContext,
 
-    #[error("The received event was not in the configured guild.")]
-    GuildMissmatch,
-
     #[error("The welcome channel is missing.")]
     MissingWelcomeChannel
 }
@@ -49,7 +46,7 @@ pub async fn guild_member_add(context: Context, member: Member) -> Result<(), Bo
         .welcome_roles();
 
     if member.guild_id != act_guild_id {
-        return Err(GuildMemberAddError::GuildMissmatch.into());
+        return Ok(());
     }
 
     let guild_channels = member

@@ -22,7 +22,9 @@ pub enum EnvironmentError {
 #[derive(Envconfig, PartialEq)]
 pub struct Environment {
     #[envconfig(from = "DISCORD_TOKEN")]
-    discord_token: String
+    discord_token: String,
+    #[envconfig(from = "GEMINI_TOKEN")]
+    gemini_token: String
 }
 
 impl Environment {
@@ -39,5 +41,10 @@ impl Environment {
     /// The disacord application token, **this should never be displayed**.
     pub fn discord_token(&self) -> &str {
         &self.discord_token
+    }
+
+    /// The google gemini AI token.
+    pub fn gemini_token(&self) -> &str {
+        &self.gemini_token
     }
 }

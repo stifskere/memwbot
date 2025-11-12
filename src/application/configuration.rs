@@ -10,10 +10,16 @@ pub struct ConfigGuildWelcomeInfo {
 }
 
 #[derive(Deserialize, Debug)]
+pub struct ConfigGuildAIInfo {
+    ai_channel: ChannelId
+}
+
+#[derive(Deserialize, Debug)]
 pub struct ConfigGuildInfo {
     guild_id: GuildId,
 
-    welcome_info: ConfigGuildWelcomeInfo
+    welcome_info: ConfigGuildWelcomeInfo,
+    ai_info: ConfigGuildAIInfo
 }
 
 #[derive(Deserialize, Debug)]
@@ -33,6 +39,13 @@ impl ConfigGuildWelcomeInfo {
     }
 }
 
+impl ConfigGuildAIInfo {
+    /// The channel where the bot will be able to chat.
+    pub fn ai_channel(&self) -> ChannelId {
+        self.ai_channel
+    }
+}
+
 impl ConfigGuildInfo {
     /// The guild id this bot will act on.
     pub fn guild_id(&self) -> GuildId {
@@ -43,6 +56,11 @@ impl ConfigGuildInfo {
     /// stuff for proper welcoming.
     pub fn welcome_info(&self) -> &ConfigGuildWelcomeInfo {
         &self.welcome_info
+    }
+
+    /// Information about how AI should behave.
+    pub fn ai_info(&self) -> &ConfigGuildAIInfo {
+        &self.ai_info
     }
 }
 

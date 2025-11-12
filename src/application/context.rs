@@ -1,6 +1,7 @@
 use std::sync::Arc;
 
 use config::ConfigError;
+use gemini_rust::{Gemini, ClientError as GeminiClientError};
 use serenity::prelude::TypeMapKey;
 use thiserror::Error;
 
@@ -9,6 +10,9 @@ use crate::application::{configuration::Configuration, environment::{Environment
 /// For errors happening while loading [AppContext].
 #[derive(Error, Debug)]
 pub enum AppContextError {
+    #[error("Gemini client error: {0:#}")]
+    GeminiInitError(#[from] GeminiClientError),
+
     #[error("Environment error, {0:#}")]
     EnvironmentError(#[from] EnvironmentError),
 
@@ -23,6 +27,8 @@ pub struct AppContextKey;
 /// such as environment, configuration, third party
 /// clients and so on.
 pub struct AppContext {
+    gemini_client: Gemini,
+
     configuration: Configuration,
     environment: Environment
 }
@@ -38,10 +44,19 @@ impl AppContext {
     /// This should run only once and be stored in serenity
     /// bot context.
     pub fn create() -> Result<Self, AppContextError> {
+        let environment = Environment::load_validated()?;
+
         Ok(Self {
-            environment: Environment::load_validated()?,
+            gemini_client: Gemini::new(environment.gemini_token())?,
+
+            environment: environment,
             configuration: Configuration::load()?
         })
+    }
+
+    /// The google GEMINI client.
+    pub fn gemini_client(&self) -> &Gemini {
+        &self.gemini_client
     }
 
     /// The application environment variables.
