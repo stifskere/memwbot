@@ -90,4 +90,8 @@ jobs:
             -var="cluster={
               kubeconfig = \"./kube-config\",
               deployment_tag = \"$REGISTRY/$IMAGE_NAME:${{ steps.version.outputs.project_version }}\"
+            }" \
+            -var="app={
+              discord_token = \"${{ secrets.DISCORD_TOKEN }}\"
+              gemini_token = \"${{ secrets.GEMINI_TOKEN }}\"
             }"

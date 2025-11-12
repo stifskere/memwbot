@@ -45,7 +45,7 @@ just := `command -v just`
 	then
 		cargo build --release;
 	else
-		image_name="${IMAGE_TAG:-portfolio}";
+		image_name="${IMAGE_TAG:-memwbot}";
 		version="$({{just}} info version)";
 
 		docker build --build-arg BUILD_STAGE=true -t "$image_name:$version" -f ./docker/prod.dockerfile .;

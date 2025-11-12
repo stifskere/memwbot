@@ -9,3 +9,14 @@ variable "cluster" {
     deployment_tag = string
   })
 }
+
+variable "app" {
+  description = "Application environment variables."
+  type = object({
+    // The discord application token.
+    discord_token = string
+
+    // The gemini application token.
+    gemini_token = string
+  })
+}

@@ -36,6 +36,14 @@ resource "kubernetes_deployment" "portfolio" {
         container {
           name = "memwbot"
           image = var.cluster.deployment_tag
+          env {
+            name = "DISCORD_TOKEN"
+            value = var.app.discord_token
+          }
+          env {
+            name = "GEMINI_TOKEN"
+            value = var.app.gemini_token
+          }
         }
       }
     }
