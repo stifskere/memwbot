@@ -49,6 +49,7 @@ FROM debian:bookworm-slim AS runner
 
 # Copy built application.
 COPY --chown=prod:prod --from=builder /home/prod/app/target/release /home/prod/app/
+COPY --chown=prod:prod --from=builder /home/prod/app/Config.toml /home/prod/app/Config.toml
 
 # Setup running user.
 RUN useradd -m prod
