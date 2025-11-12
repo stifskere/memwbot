@@ -16,7 +16,7 @@ ENV DEBIAN_FRONTEND=nointeractive
 RUN useradd -m dev
 WORKDIR /home/dev/memwbot
 
-RUN mkdir target dist
+RUN mkdir target
 RUN chown -R dev:dev .
 
 USER dev

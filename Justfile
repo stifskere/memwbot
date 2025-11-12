@@ -43,7 +43,7 @@ just := `command -v just`
 
 	if [ "$BUILD_STAGE" = "true" ]
 	then
-		trunk build --release;
+		cargo build --release;
 	else
 		image_name="${IMAGE_TAG:-portfolio}";
 		version="$({{just}} info version)";
