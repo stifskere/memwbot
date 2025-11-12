@@ -11,6 +11,7 @@ use tracing_subscriber::{fmt, EnvFilter};
 use crate::application::context::{AppContext, AppContextError, AppContextKey};
 use crate::events::ai_channel::AiChannelEventHandler;
 use crate::events::member_salute::MemberSaluteEventHandler;
+use crate::events::shard_presence::ShardPresenceEventHandler;
 
 mod application;
 mod events;
@@ -47,6 +48,7 @@ async fn main() -> Result<(), BotError> {
     )
         .event_handler(AiChannelEventHandler)
         .event_handler(MemberSaluteEventHandler)
+        .event_handler(ShardPresenceEventHandler::default())
         .await?;
 
     {

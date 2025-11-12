@@ -1,0 +1,15 @@
+services:
+  memwbot:
+    container_name: memwbot
+    build:
+      dockerfile: dev.dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ../:/home/dev/memwbot
+      - memwbot-cargo-target:/home/dev/memwbot/target
+      - memwbot-cargo-dist:/home/dev/memwbot/dist
+
+volumes:
+  memwbot-cargo-target:
+  memwbot-cargo-dist:
