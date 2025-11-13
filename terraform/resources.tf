@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "memwbot" {
   }
 }
 
-resource "kubernetes_deployment" "portfolio" {
+resource "kubernetes_deployment" "memwbot" {
   metadata {
     name = "memwbot"
     namespace = kubernetes_namespace.memwbot.metadata[0].name

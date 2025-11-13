@@ -64,5 +64,4 @@ USER prod
 ENV HOME=/home/prod
 
 # Expose and run built application.
-EXPOSE 8080
 CMD [ "./memwbot" ]
